@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "regex-engine-cpp.dir\\Debug\\main.obj",
+            "outputs": [
+                "C:\\Users\\botad\\source\\repos\\regex-engine-cpp\\build\\regex-engine-cpp.dir\\Debug\\vc143.pdb",
+                "regex-engine-cpp.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}
