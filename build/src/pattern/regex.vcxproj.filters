@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\alpha.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\character_group.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\character.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\choice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\digit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\match_result.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\one_or_more.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\optional.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\pattern_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\regex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\sequence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\src\wildcard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\interface\imatch_result.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\interface\interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\interface\ipattern_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\interface\ipattern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\interface\isequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\alpha.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\character_group.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\choice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\digit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\match_result.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\one_or_more.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\optional.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\pattern_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\regex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\sequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\include\wildcard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\botad\source\repos\regex-engine-cpp\src\pattern\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{0202175D-C87B-38A5-A5F9-C23101E1958D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{644B072E-1A95-3161-A0B7-038E505C3A4A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

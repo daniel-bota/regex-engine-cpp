@@ -6,6 +6,10 @@
 			[
 				{
 					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
@@ -17,6 +21,36 @@
 					[
 						0,
 						1,
+						3
+					]
+				},
+				{
+					"build" : "src",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-src-Debug-c94b7c2814d5a21df52c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src"
+				},
+				{
+					"build" : "src/pattern",
+					"jsonFile" : "directory-src.pattern-Debug-e3a1f56e55eb023e82c6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "src/pattern",
+					"targetIndexes" : 
+					[
 						2
 					]
 				}
@@ -27,14 +61,17 @@
 				{
 					"directoryIndexes" : 
 					[
-						0
+						0,
+						1,
+						2
 					],
 					"name" : "regex-engine-cpp",
 					"targetIndexes" : 
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -43,7 +80,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-Debug-a248b4b76a3c932c6b34.json",
+					"jsonFile" : "target-ALL_BUILD-Debug-08fab4f55f53b70bb3c1.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
@@ -55,9 +92,16 @@
 					"projectIndex" : 0
 				},
 				{
+					"directoryIndex" : 2,
+					"id" : "regex::@d977f6f711efd0469a77",
+					"jsonFile" : "target-regex-Debug-f908a1b0c2fe7eb8ec12.json",
+					"name" : "regex",
+					"projectIndex" : 0
+				},
+				{
 					"directoryIndex" : 0,
 					"id" : "regex-engine-cpp::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-regex-engine-cpp-Debug-70bec70565bb045d439c.json",
+					"jsonFile" : "target-regex-engine-cpp-Debug-3d1d53b15a6baedcca3e.json",
 					"name" : "regex-engine-cpp",
 					"projectIndex" : 0
 				}
@@ -68,6 +112,10 @@
 			[
 				{
 					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
 					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
@@ -79,6 +127,36 @@
 					[
 						0,
 						1,
+						3
+					]
+				},
+				{
+					"build" : "src",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-src-Release-c94b7c2814d5a21df52c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src"
+				},
+				{
+					"build" : "src/pattern",
+					"jsonFile" : "directory-src.pattern-Release-e3a1f56e55eb023e82c6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "src/pattern",
+					"targetIndexes" : 
+					[
 						2
 					]
 				}
@@ -89,14 +167,17 @@
 				{
 					"directoryIndexes" : 
 					[
-						0
+						0,
+						1,
+						2
 					],
 					"name" : "regex-engine-cpp",
 					"targetIndexes" : 
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -105,7 +186,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-Release-a248b4b76a3c932c6b34.json",
+					"jsonFile" : "target-ALL_BUILD-Release-08fab4f55f53b70bb3c1.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
@@ -117,9 +198,16 @@
 					"projectIndex" : 0
 				},
 				{
+					"directoryIndex" : 2,
+					"id" : "regex::@d977f6f711efd0469a77",
+					"jsonFile" : "target-regex-Release-04b553511399685c0823.json",
+					"name" : "regex",
+					"projectIndex" : 0
+				},
+				{
 					"directoryIndex" : 0,
 					"id" : "regex-engine-cpp::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-regex-engine-cpp-Release-aeaba10e1a0dc6cc0ebe.json",
+					"jsonFile" : "target-regex-engine-cpp-Release-f9b4f9c7a57f954d3ee2.json",
 					"name" : "regex-engine-cpp",
 					"projectIndex" : 0
 				}
@@ -130,6 +218,10 @@
 			[
 				{
 					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
 					"jsonFile" : "directory-.-MinSizeRel-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
@@ -141,6 +233,36 @@
 					[
 						0,
 						1,
+						3
+					]
+				},
+				{
+					"build" : "src",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-src-MinSizeRel-c94b7c2814d5a21df52c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src"
+				},
+				{
+					"build" : "src/pattern",
+					"jsonFile" : "directory-src.pattern-MinSizeRel-e3a1f56e55eb023e82c6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "src/pattern",
+					"targetIndexes" : 
+					[
 						2
 					]
 				}
@@ -151,14 +273,17 @@
 				{
 					"directoryIndexes" : 
 					[
-						0
+						0,
+						1,
+						2
 					],
 					"name" : "regex-engine-cpp",
 					"targetIndexes" : 
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -167,7 +292,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-MinSizeRel-a248b4b76a3c932c6b34.json",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-08fab4f55f53b70bb3c1.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
@@ -179,9 +304,16 @@
 					"projectIndex" : 0
 				},
 				{
+					"directoryIndex" : 2,
+					"id" : "regex::@d977f6f711efd0469a77",
+					"jsonFile" : "target-regex-MinSizeRel-8a770a86bf924d744bfe.json",
+					"name" : "regex",
+					"projectIndex" : 0
+				},
+				{
 					"directoryIndex" : 0,
 					"id" : "regex-engine-cpp::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-regex-engine-cpp-MinSizeRel-523a32a3dab934e39e9b.json",
+					"jsonFile" : "target-regex-engine-cpp-MinSizeRel-7f2f181622ff7e047d91.json",
 					"name" : "regex-engine-cpp",
 					"projectIndex" : 0
 				}
@@ -192,6 +324,10 @@
 			[
 				{
 					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
 					"jsonFile" : "directory-.-RelWithDebInfo-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
@@ -203,6 +339,36 @@
 					[
 						0,
 						1,
+						3
+					]
+				},
+				{
+					"build" : "src",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-src-RelWithDebInfo-c94b7c2814d5a21df52c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src"
+				},
+				{
+					"build" : "src/pattern",
+					"jsonFile" : "directory-src.pattern-RelWithDebInfo-e3a1f56e55eb023e82c6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "src/pattern",
+					"targetIndexes" : 
+					[
 						2
 					]
 				}
@@ -213,14 +379,17 @@
 				{
 					"directoryIndexes" : 
 					[
-						0
+						0,
+						1,
+						2
 					],
 					"name" : "regex-engine-cpp",
 					"targetIndexes" : 
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -229,7 +398,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-a248b4b76a3c932c6b34.json",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-08fab4f55f53b70bb3c1.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
@@ -241,9 +410,16 @@
 					"projectIndex" : 0
 				},
 				{
+					"directoryIndex" : 2,
+					"id" : "regex::@d977f6f711efd0469a77",
+					"jsonFile" : "target-regex-RelWithDebInfo-4b9b02923fcdab3bc672.json",
+					"name" : "regex",
+					"projectIndex" : 0
+				},
+				{
 					"directoryIndex" : 0,
 					"id" : "regex-engine-cpp::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-regex-engine-cpp-RelWithDebInfo-05ce8e1687bf8116e043.json",
+					"jsonFile" : "target-regex-engine-cpp-RelWithDebInfo-8ffb3c88f939d85eef91.json",
 					"name" : "regex-engine-cpp",
 					"projectIndex" : 0
 				}

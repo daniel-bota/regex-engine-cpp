@@ -1,3 +1,4 @@
 C:/Users/botad/source/repos/regex-engine-cpp/build/CMakeFiles/regex-engine-cpp.dir
 C:/Users/botad/source/repos/regex-engine-cpp/build/CMakeFiles/ALL_BUILD.dir
 C:/Users/botad/source/repos/regex-engine-cpp/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/botad/source/repos/regex-engine-cpp/build/src/pattern/CMakeFiles/regex.dir
