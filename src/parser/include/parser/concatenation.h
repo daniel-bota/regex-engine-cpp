@@ -1,7 +1,7 @@
 #ifndef _REGEX_PARSER_CONCATENATION_H
 #define _REGEX_PARSER_CONCATENATION_H
 
-#include "ioperator.h"
+#include "inode.h"
 
 namespace regex::parser
 {
