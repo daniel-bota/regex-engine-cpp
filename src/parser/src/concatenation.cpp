@@ -17,4 +17,16 @@ node_type concatenation::type()
     return _type;
 }
 
+
+inode* concatenation::right()
+{
+    return _right;
+}
+
+
+inode* concatenation::left()
+{
+    return _left;
+}
+
 NAMESPACE_END(regex::parser)

@@ -10,6 +10,8 @@ namespace regex::parser
     public:
         concatenation(inode* left, inode* right);
         node_type type() override;
+        inode* right() override;
+        inode* left() override;
 
     private:
         node_type _type;

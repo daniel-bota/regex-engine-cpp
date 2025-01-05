@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "test"
+		}
+	],
+	"settings": {
+		"cmake.configureArgs": [
+			"-DCMAKE_TOOLCHAIN_FILE=${env:VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+		]
+	}
+}

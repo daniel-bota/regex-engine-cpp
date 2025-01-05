@@ -11,6 +11,8 @@ namespace regex::parser
         INTERFACE(inode)
     public:
         virtual node_type type() = 0;
+        virtual inode* left() = 0;
+        virtual inode* right() = 0;
 
     protected:
         inode() = default;
