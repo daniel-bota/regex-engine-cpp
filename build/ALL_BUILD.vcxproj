@@ -178,9 +178,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\botad\source\repos\regex-engine-cpp\build\src\pattern\regex.vcxproj">
-      <Project>{B7D8EB4D-C437-3073-B29A-7C74E39660FD}</Project>
-      <Name>regex</Name>
+    <ProjectReference Include="C:\Users\botad\source\repos\regex-engine-cpp\build\src\framework\framework.vcxproj">
+      <Project>{D475CD38-64D1-3CBB-851D-53FF93FB3686}</Project>
+      <Name>framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\botad\source\repos\regex-engine-cpp\build\src\parser\parser.vcxproj">
+      <Project>{A51E32B3-CD63-34FA-BA4D-232D97829607}</Project>
+      <Name>parser</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Users\botad\source\repos\regex-engine-cpp\build\regex-engine-cpp.vcxproj">
       <Project>{072634C8-DB4E-3C62-B0B1-47A2EDB52A76}</Project>
