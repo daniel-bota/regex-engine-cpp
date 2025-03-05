@@ -1,2 +1,0 @@
-file(GLOB_RECURSE PARSER_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-target_sources(regex-engine-test PRIVATE ${PARSER_SOURCE})

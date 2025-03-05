@@ -1,16 +1,22 @@
-#ifndef _REGEX_PARSER_CONCATENATION_H
-#define _REGEX_PARSER_CONCATENATION_H
+#ifndef _REGEX_PARSER_CHARACTER_H
+#define _REGEX_PARSER_CHARACTER_H
 
 #include "parser/interface/i_token.h"
+// #include "parser/quantifier.h"
 
 namespace regex::parser
 {
-    class concatenation : public i_token
+    class i_quantifier;
+}
+
+namespace regex::parser
+{
+    class character : public i_token
     {
     public:
-        concatenation() = default;
-        concatenation(const concatenation&);
-        ~concatenation();
+        character(const std::string& source);
+        // character(const std::string& source, const i_quantifier& quantifier);
+        character(const character&);
         token_type get_type() const override;
         // operator_type get_operator_type() const override;
         // const quantifier& get_quantifier() const override;
@@ -23,11 +29,15 @@ namespace regex::parser
         bool add_to_ast_parser(i_ast_parser*) const override;
         bool apply_to_ast_parser(i_ast_parser*) const override;
 
-        bool operator==(const i_token&) const override;
+        bool operator==(const i_token& other) const override;
+
+    protected:
+        character() = delete;
 
     private:
         std::string _source;
+        // std::unique_ptr<i_quantifier> _quantifier;
     };
 }
 
-#endif // _REGEX_PARSER_CONCATENATION_H
+#endif // _REGEX_PARSER_CHARACTER_H

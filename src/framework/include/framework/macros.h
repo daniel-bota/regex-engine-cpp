@@ -4,16 +4,17 @@
 #define INTERFACE(className)                                                   \
     /*rule of five*/                                                           \
 public:                                                                        \
-    virtual ~className() = 0;                                                  \
+    virtual ~className(){};                                                    \
                                                                                \
 protected:                                                                     \
+    className() = default;                                                     \
     className(const className& other) = delete;                                \
     className(className&& other) = delete;                                     \
     className& operator=(const className& other) = delete;                     \
     className& operator=(className&& other) = delete;
 
 #define NAMESPACE_BEGIN(name)                                                  \
-    namespace name                                                            \
+    namespace name                                                             \
     {
 
 #define NAMESPACE_END(name) }

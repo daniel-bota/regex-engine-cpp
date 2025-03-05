@@ -9,7 +9,10 @@ file(GLOB_RECURSE PARSER_IMPLEMENTATION ${PARSER_SOURCE_DIR}/*.cpp)
 set (PARSER_SOURCES ${PARSER_HEADERS} ${PARSER_IMPLEMENTATION})
 
 add_library(parser STATIC ${PARSER_SOURCES})
-set_target_properties(parser PROPERTIES LINKER_LANGUAGE CXX)
-target_include_directories(parser PRIVATE ${PARSER_HEADER_DIR} ${PARSER_INTERFACE_DIR})
+# set_target_properties(parser PROPERTIES LINKER_LANGUAGE CXX)
+# target_include_directories(parser PRIVATE ${PARSER_HEADER_DIR} ${PARSER_INTERFACE_DIR})
+target_include_directories(parser PRIVATE ${PARSER_INCLUDE_DIR})
 target_include_directories(parser INTERFACE ${PARSER_INCLUDE_DIR})
 target_link_libraries(parser PUBLIC framework)
+
+add_subdirectory(test)

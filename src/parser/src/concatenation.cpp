@@ -1,32 +1,82 @@
-#include "concatenation.h"
+#include "parser/concatenation.h"
 
 #include "framework/macros.h"
-#include "operator_type.h"
+#include "parser/interface/i_ast_parser.h"
+#include "parser/operator_type.h"
 
 NAMESPACE_BEGIN(regex::parser)
 
 
-concatenation::concatenation(inode* left, inode* right)
-    : inode(), _left(left), _right(right)
+concatenation::concatenation(const concatenation& other)
+    : i_token()
 {
-    _type = node_type::concatenation;
-}
-
-node_type concatenation::type()
-{
-    return _type;
+    _source = other._source;
 }
 
 
-inode* concatenation::right()
+concatenation::~concatenation()
 {
-    return _right;
 }
 
 
-inode* concatenation::left()
+token_type concatenation::get_type() const
 {
-    return _left;
+    return token_type::concatenation;
 }
+
+
+// operator_type concatenation::get_operator_type() const
+// {
+//     return operator_type();
+// }
+
+
+const std::string& concatenation::get_source() const
+{
+    return _source;
+}
+
+operator_precedence
+    concatenation::get_operator_precedence(const i_token* const other) const
+{
+    return get_operator_precedence(other->get_type());
+}
+
+operator_precedence
+    concatenation::get_operator_precedence(const token_type& other_type) const
+{
+    switch (other_type) {
+    case token_type::concatenation:
+        return operator_precedence::equal;
+    case token_type::quantifier:
+        return operator_precedence::lower;
+    default:
+        return operator_precedence::higher;
+    }
+}
+
+
+std::unique_ptr<i_token> concatenation::clone() const
+{
+    return std::make_unique<concatenation>(*this);
+}
+
+
+bool concatenation::add_to_ast_parser(i_ast_parser* parser) const
+{
+    return parser->add_concatenation();
+}
+
+bool concatenation::apply_to_ast_parser(i_ast_parser* parser) const
+{
+    return parser->apply_concatenation_from_stack(this);
+}
+
+
+bool concatenation::operator==(const i_token& other) const
+{
+    return this->get_type() == other.get_type();
+}
+
 
 NAMESPACE_END(regex::parser)
