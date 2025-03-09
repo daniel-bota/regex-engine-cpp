@@ -10,17 +10,37 @@ namespace regex::parser
     class node : public i_node
     {
     public:
-        node(std::unique_ptr<i_token> token);
+        /*
+        Takes ownership of the specified i_token.
+
+        If token is null -> throws
+        regex::parser::exception::invalid_argument exception.
+        */
+        explicit node(std::unique_ptr<i_token> token);
+        /*
+        Clones the specified token and takes ownership of the resulting
+        i_token.
+
+        If token is null -> throws
+        regex::parser::exception::invalid_argument exception.
+        */
+        explicit node(const i_token* const token);
+        /*
+        Clones the specified i_token and takes ownership of the resulting
+        object.
+        */
+        explicit node(const i_token& token);
 
         i_node* left() const override;
         i_node* right() const override;
-        i_token* get_token() const override;
+        const i_token& get_token() const override;
         bool is_leaf() const override;
         void set_left(std::unique_ptr<i_node>) override;
         void set_right(std::unique_ptr<i_node>) override;
 
     protected:
         node() = delete;
+
     private:
         std::unique_ptr<i_node> _left;
         std::unique_ptr<i_node> _right;

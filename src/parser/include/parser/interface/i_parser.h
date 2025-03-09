@@ -28,7 +28,10 @@ namespace regex::parser
     {
         INTERFACE(i_parser)
     public:
-        virtual parse_result compute(const std::string& regex) = 0;
+        /*
+         * throws exception
+         */
+        virtual void compute(const std::string& regex) = 0;
 
     protected:
     };

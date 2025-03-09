@@ -9,19 +9,19 @@ namespace regex::parser
     {
     public:
         concatenation() = default;
-        concatenation(const concatenation&);
+        explicit concatenation(const concatenation&);
         ~concatenation();
         token_type get_type() const override;
         // operator_type get_operator_type() const override;
         // const quantifier& get_quantifier() const override;
         const std::string& get_source() const override;
         operator_precedence
-            get_operator_precedence(const i_token* const) const override;
+            get_operator_precedence(const i_token&) const override;
         operator_precedence
             get_operator_precedence(const token_type&) const override;
         std::unique_ptr<i_token> clone() const override;
-        bool add_to_ast_parser(i_ast_parser*) const override;
-        bool apply_to_ast_parser(i_ast_parser*) const override;
+        void add_to_ast_parser(i_ast_parser&) const override;
+        void apply_to_ast_parser(i_ast_parser&) const override;
 
         bool operator==(const i_token&) const override;
 

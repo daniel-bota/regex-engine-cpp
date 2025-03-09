@@ -22,11 +22,9 @@ void token_parser_test::TearDownTestSuite()
 
 TEST_F(token_parser_test, computes_single_character)
 {
-    parse_result result = _parser.compute("a");
-    character expected_token("a");
-    ASSERT_EQ(parse_status::success, result.status);
-    ASSERT_EQ(std::string(), result.message);
+    ASSERT_NO_THROW(_parser.compute("a"));
     ASSERT_TRUE(_parser.get_token());
+    character expected_token("a");
     EXPECT_EQ(expected_token, *_parser.get_token());
 }
 

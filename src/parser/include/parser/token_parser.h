@@ -16,8 +16,8 @@ namespace regex::parser
     {
     public:
         ~token_parser();
-        parse_result compute(const std::string& source) override;
-        i_token* get_token() const override;
+        void compute(const std::string& source) override;
+        i_token* const get_token() const override;
 
     private:
         std::unique_ptr<i_token> _token;

@@ -13,8 +13,8 @@ namespace regex::parser
         quantifier();
         using quantifier_range = std::pair<int, int>;
         quantifier(const std::string& source, const quantifier_range& range);
-        bool add_to_ast_parser(i_ast_parser*) const override;
-        bool apply_to_ast_parser(i_ast_parser*) const override;
+        void add_to_ast_parser(i_ast_parser&) const override;
+        void apply_to_ast_parser(i_ast_parser&) const override;
         
 
 

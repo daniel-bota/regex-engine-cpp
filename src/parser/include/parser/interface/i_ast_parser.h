@@ -21,12 +21,12 @@ namespace regex::parser
     {
         INTERFACE(i_ast_parser)
     public:
-        virtual i_syntax_tree* get_syntax_tree() const = 0;
-        virtual bool add_character(const character* const) = 0;
-        virtual bool add_concatenation() = 0;
-        virtual bool add_quantifier(const quantifier* const) = 0;
-        virtual bool apply_concatenation_from_stack(const concatenation* const) = 0;
-        virtual bool apply_quantifier_from_stack(const quantifier* const) = 0;
+        virtual const i_syntax_tree& get_syntax_tree() const = 0;
+        virtual void add_character(const character&) = 0;
+        virtual void add_concatenation() = 0;
+        virtual void add_quantifier(const quantifier&) = 0;
+        virtual void apply_concatenation_from_stack(const concatenation&) = 0;
+        virtual void apply_quantifier_from_stack(const quantifier&) = 0;
 
     protected:
     };

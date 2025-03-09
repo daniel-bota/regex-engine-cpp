@@ -53,9 +53,9 @@ const std::string& character::get_source() const
 }
 
 operator_precedence
-    character::get_operator_precedence(const i_token* const other) const
+    character::get_operator_precedence(const i_token& other) const
 {
-    return get_operator_precedence(other->get_type());
+    return get_operator_precedence(other.get_type());
 }
 
 operator_precedence character::get_operator_precedence(const token_type&) const
@@ -70,14 +70,14 @@ std::unique_ptr<i_token> character::clone() const
 }
 
 
-bool character::add_to_ast_parser(i_ast_parser* parser) const
+void character::add_to_ast_parser(i_ast_parser& parser) const
 {
-    return parser->add_character(this);
+    parser.add_character(*this);
 }
 
-bool character::apply_to_ast_parser(i_ast_parser*) const
+void character::apply_to_ast_parser(i_ast_parser&) const
 {
-    return false;
+    return;
 }
 
 

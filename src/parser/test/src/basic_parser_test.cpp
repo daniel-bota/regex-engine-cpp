@@ -9,9 +9,8 @@ namespace
 {
     const regex::parser::parse_status status_success{
         regex::parser::parse_status::success};
-    const regex::parser::parse_result result_success{
-        status_success,
-        std::string()};
+    const regex::parser::parse_result result_success{status_success,
+                                                     std::string()};
 }
 
 NAMESPACE_BEGIN(regex::parser)
@@ -32,21 +31,20 @@ void basic_parser_test::TearDownTestSuite()
 
 TEST_F(basic_parser_test, computes_single_character)
 {
-    parse_result result = _parser.compute("a");
-    std::string expected_traversal("a");
-    ASSERT_EQ(status_success, result.status);
-    EXPECT_EQ(expected_traversal,
-              _parser.get_syntax_tree()->print(tree_traversal::dfs_post_order));
+    ASSERT_NO_THROW(_parser.compute("a"));
+    std::string traversal;
+    ASSERT_NO_THROW(traversal = _parser.get_syntax_tree().print(
+                        tree_traversal::dfs_post_order));
+    EXPECT_EQ(std::string("a"), traversal);
 }
 
 TEST_F(basic_parser_test, computes_concatenation)
 {
-    parse_result result = _parser.compute("ab");
-    std::string expected_traversal("ab");
-    ASSERT_EQ(status_success, result.status);
-    EXPECT_EQ(expected_traversal,
-              _parser.get_syntax_tree()->print(tree_traversal::dfs_post_order));
-
+    ASSERT_NO_THROW(_parser.compute("ab"));
+    std::string traversal;
+    ASSERT_NO_THROW(traversal = _parser.get_syntax_tree().print(
+                        tree_traversal::dfs_post_order));
+    EXPECT_EQ(std::string("ab"), traversal);
 }
 
 

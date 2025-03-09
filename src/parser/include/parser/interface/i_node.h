@@ -17,7 +17,7 @@ namespace regex::parser
     public:
         virtual i_node* left() const = 0;
         virtual i_node* right() const = 0;
-        virtual i_token* get_token() const = 0;
+        virtual const i_token& get_token() const = 0;
         virtual bool is_leaf() const = 0;
         virtual void set_left(std::unique_ptr<i_node>) = 0;
         virtual void set_right(std::unique_ptr<i_node>) = 0;

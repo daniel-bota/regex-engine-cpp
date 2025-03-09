@@ -37,9 +37,9 @@ const std::string& concatenation::get_source() const
 }
 
 operator_precedence
-    concatenation::get_operator_precedence(const i_token* const other) const
+    concatenation::get_operator_precedence(const i_token& other) const
 {
-    return get_operator_precedence(other->get_type());
+    return get_operator_precedence(other.get_type());
 }
 
 operator_precedence
@@ -62,14 +62,14 @@ std::unique_ptr<i_token> concatenation::clone() const
 }
 
 
-bool concatenation::add_to_ast_parser(i_ast_parser* parser) const
+void concatenation::add_to_ast_parser(i_ast_parser& parser) const
 {
-    return parser->add_concatenation();
+    return parser.add_concatenation();
 }
 
-bool concatenation::apply_to_ast_parser(i_ast_parser* parser) const
+void concatenation::apply_to_ast_parser(i_ast_parser& parser) const
 {
-    return parser->apply_concatenation_from_stack(this);
+    return parser.apply_concatenation_from_stack(*this);
 }
 
 

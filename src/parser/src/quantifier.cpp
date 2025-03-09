@@ -18,14 +18,14 @@ quantifier::quantifier(const std::string& source, const quantifier_range& range)
 }
 
 
-bool quantifier::add_to_ast_parser(i_ast_parser* parser) const
+void quantifier::add_to_ast_parser(i_ast_parser& parser) const
 {
-    return parser->add_quantifier(this);
+    parser.add_quantifier(*this);
 }
 
-bool quantifier::apply_to_ast_parser(i_ast_parser* parser) const
+void quantifier::apply_to_ast_parser(i_ast_parser& parser) const
 {
-    return parser->apply_quantifier_from_stack(this);
+    parser.apply_quantifier_from_stack(*this);
 }
 
 

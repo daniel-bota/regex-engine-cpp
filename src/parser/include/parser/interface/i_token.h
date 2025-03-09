@@ -45,13 +45,13 @@ namespace regex::parser
         // virtual const quantifier& get_quantifier() const = 0;
         virtual const std::string& get_source() const = 0;
         virtual operator_precedence
-            get_operator_precedence(const i_token* const) const = 0;
+            get_operator_precedence(const i_token&) const = 0;
         virtual operator_precedence
             get_operator_precedence(const token_type&) const = 0;
         virtual std::unique_ptr<i_token> clone() const = 0;
 
-        virtual bool add_to_ast_parser(i_ast_parser*) const = 0;
-        virtual bool apply_to_ast_parser(i_ast_parser*) const = 0;
+        virtual void add_to_ast_parser(i_ast_parser&) const = 0;
+        virtual void apply_to_ast_parser(i_ast_parser&) const = 0;
 
         virtual bool operator==(const i_token&) const = 0;
 

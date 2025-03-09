@@ -10,12 +10,29 @@ namespace regex::parser
     class syntax_tree : public i_syntax_tree
     {
     public:
-        i_node* root() const override;
+        i_node* const root() const override;
         void set_root(std::unique_ptr<i_node> node) override;
+        /*
+        Moves the specified i_token to the created node.
+
+        if token is null -> throws
+        regex::parser::exception::invalid_argument exception.
+        */
         std::unique_ptr<i_node>
             create_node(std::unique_ptr<i_token> token) const override;
+        /*
+        Creates a new node with a clone of the specified i_token.
+
+        If token is null -> throws
+        regex::parser::exception::invalid_argument exception.
+        */
         std::unique_ptr<i_node>
-            create_node(const i_token* const token) const override;
+            create_node(const i_token* const) const override;
+        /*
+        Creates a new node with a clone of the specified i_token.
+        */
+        std::unique_ptr<i_node>
+            create_node(const i_token& token) const override;
         std::string print(const tree_traversal& traversal) const override;
 
     private:

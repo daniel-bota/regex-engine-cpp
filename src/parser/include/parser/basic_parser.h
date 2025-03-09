@@ -1,7 +1,6 @@
 #ifndef _REGEX_PARSER_BASIC_PARSER_H
 #define _REGEX_PARSER_BASIC_PARSER_H
 
-#include <deque>
 #include <memory>
 #include <parser/interface/i_ast_parser.h>
 #include <stack>
@@ -19,31 +18,91 @@ namespace regex::parser
     class basic_parser : public i_ast_parser
     {
     public:
-        basic_parser(std::unique_ptr<i_token_parser> token_parser);
+        /*
+        Takes ownership of the specified i_token_parser.
+
+        Throws regex::parser::exception::invalid_argument exception if
+        token_parser is null.
+        */
+        explicit basic_parser(std::unique_ptr<i_token_parser> token_parser);
         ~basic_parser();
 
-        parse_result compute(const std::string& regex);
-        i_syntax_tree* get_syntax_tree() const override;
-        bool add_character(const character* const) override;
-        bool add_concatenation() override;
-        bool add_quantifier(const quantifier* const) override;
-        bool
-            apply_concatenation_from_stack(const concatenation* const) override;
-        bool apply_quantifier_from_stack(const quantifier* const) override;
+        void compute(const std::string& regex);
+        const i_syntax_tree& get_syntax_tree() const override;
+        /*
+        Adds a clone of the specified character token to the argument stack.
 
+        Throws regex::parser::exception::invalid_expression exception if
+        an error occurs.
+        */
+        void add_character(const character&) override;
+        /*
+        Adds a new concatenation token to the operator stack.
+
+        Throws regex::parser::exception::invalid_expression exception if
+        _argument_stack is empty or another error occurs.
+        */
+        void add_concatenation() override;
+        /*
+        Adds a clone of the specified quantiier token to the operator stack.
+
+        Throws regex::parser::exception::invalid_expression exception if
+        _argument_stack is empty.
+        */
+        void add_quantifier(const quantifier&) override;
+        /*
+        Applies the operator from the top of the operator stack if it matches
+        the specified concatenation token.
+
+        Throws regex::parser::exception::invalid_expression exception if
+        an error ocurs.
+        */
+        void apply_concatenation_from_stack(const concatenation&) override;
+        /*
+        Applies the operator from the top of the operator stack if it matches
+        the specified quantifier token.
+
+        Throws regex::parser::exception::invalid_expression exception if
+        an error ocurs.
+        */
+        void apply_quantifier_from_stack(const quantifier&) override;
 
     protected:
     private:
-        // std::deque<i_node> _nodes;
         std::stack<std::unique_ptr<i_node>> _argument_stack;
         std::stack<std::unique_ptr<i_node>> _operator_stack;
         std::unique_ptr<i_syntax_tree> _syntax_tree;
         std::unique_ptr<i_token_parser> _token_parser;
 
+        /*
+        Clears all stacks and the syntax tree.
+        */
+        void clear();
         std::unique_ptr<i_syntax_tree> create_syntax_tree();
-        parse_result consume_first_token(std::string& input);
-        bool apply_higher_precedence_operators(const token_type&);
-        bool apply_all_operators();
+        /*
+        Cosumes the first token from the input string and adds it to the
+        corresponding stack (argument or operator).
+
+        Throws regex::parser::exception::invalid_regex exception if an error
+        occurs.
+        */
+        void consume_first_token(std::string& input);
+        /*
+        Applies operators from the top of the operator stack if they have higher
+        precedence than the specified operator.
+
+        Throws regex::parser::exception::invalid_regex exception if an error
+        occurs.
+        */
+        void apply_higher_precedence_operators(
+            const token_type& incoming_operator);
+        /*
+        Applies all operators from the the operator stack.
+
+        Throws regex::parser::exception::invalid_regex exception if an error
+        occurs.
+        */
+        void apply_all_operators();
     };
 }
 

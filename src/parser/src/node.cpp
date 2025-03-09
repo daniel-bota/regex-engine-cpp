@@ -1,5 +1,6 @@
 #include "parser/node.h"
 
+#include "parser/exception/invalid_argument.h"
 #include "parser/interface/i_token.h"
 
 NAMESPACE_BEGIN(regex::parser)
@@ -7,6 +8,25 @@ NAMESPACE_BEGIN(regex::parser)
 
 node::node(std::unique_ptr<i_token> token)
     : _token(std::move(token))
+{
+    if (!_token)
+        throw exception::invalid_argument(
+            "The i_token passed as argument to the constructor of "
+            "regex::parser::node cannot be null.");
+    token = nullptr;
+}
+
+node::node(const i_token* const token)
+    : _token(token->clone())
+{
+    if (!_token)
+        throw exception::invalid_argument(
+            "The i_token passed as argument to the constructor of "
+            "regex::parser::node cannot be null.");
+}
+
+node::node(const i_token& token)
+    : _token(token.clone())
 {
 }
 
@@ -23,9 +43,9 @@ i_node* node::right() const
 }
 
 
-i_token* node::get_token() const
+const i_token& node::get_token() const
 {
-    return _token.get();
+    return *_token;
 }
 
 

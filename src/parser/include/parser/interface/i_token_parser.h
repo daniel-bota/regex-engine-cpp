@@ -16,7 +16,7 @@ namespace regex::parser
     {
         INTERFACE(i_token_parser)
     public:
-        virtual i_token* get_token() const = 0;
+        virtual i_token* const get_token() const = 0;
 
     protected:
     };

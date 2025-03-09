@@ -15,14 +15,13 @@ token_parser::~token_parser()
 }
 
 
-parse_result token_parser::compute(const std::string& source)
+void token_parser::compute(const std::string& source)
 {
     _token = std::make_unique<character>(source);
-    return {parse_status::success, std::string()};
 }
 
 
-i_token* token_parser::get_token() const
+i_token* const token_parser::get_token() const
 {
     return _token.get();
 }

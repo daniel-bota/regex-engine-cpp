@@ -11,4 +11,4 @@ namespace
     };
 }
 
-#endif //_MODULE_CLASS_TEMPLATE_H
+#endif // _MODULE_CLASS_TEMPLATE_H
