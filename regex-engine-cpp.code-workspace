@@ -92,7 +92,8 @@
 			"csignal": "cpp",
 			"iomanip": "cpp",
 			"unordered_set": "cpp",
-			"forward_list": "cpp"
+			"forward_list": "cpp",
+			"regex": "cpp"
 		},
 		"terminal.integrated.env.windows": {
 			"PATH": "$(env:PATH);$(env:gtest)\\bin;$(env:gtest)\\debug\\bin"

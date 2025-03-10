@@ -26,14 +26,19 @@ namespace regex::parser
         */
         explicit basic_parser(std::unique_ptr<i_token_parser> token_parser);
         ~basic_parser();
+        /*
+        Transforms the specified regular expression into an abstract syntax
+        tree.
 
+        Throws a regex::parser::exception::invalid_regex exception if an error
+        occurs.
+        */
         void compute(const std::string& regex);
         const i_syntax_tree& get_syntax_tree() const override;
         /*
-        Adds a clone of the specified character token to the argument stack.
-
-        Throws regex::parser::exception::invalid_expression exception if
-        an error occurs.
+        Adds a clone of the specified character token to the argument stack. If
+        the argument stack is not empty, adds a concatenation token to the
+        top of the operand stack.
         */
         void add_character(const character&) override;
         /*

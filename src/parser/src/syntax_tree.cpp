@@ -60,7 +60,9 @@ std::string syntax_tree::print(const tree_traversal& traversal) const
     case tree_traversal::dfs_post_order:
         return print_dfs_post_order();
     default:
-        return std::string();
+        throw exception::invalid_argument(
+            "An unknown tree traversal type was "
+            "provided to the print the syntax tree.");
     }
 }
 

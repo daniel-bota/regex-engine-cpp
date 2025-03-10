@@ -29,22 +29,31 @@ void basic_parser_test::TearDownTestSuite()
 }
 
 
+void basic_parser_test::test_expected_ast_traversal(
+    const std::string& regex,
+    const tree_traversal& traversal)
+{
+    ASSERT_NO_THROW(_parser.compute(regex));
+    std::string ast_traversal;
+    ASSERT_NO_THROW(ast_traversal = _parser.get_syntax_tree().print(traversal));
+    EXPECT_EQ(regex, ast_traversal);
+}
+
+
 TEST_F(basic_parser_test, computes_single_character)
 {
-    ASSERT_NO_THROW(_parser.compute("a"));
-    std::string traversal;
-    ASSERT_NO_THROW(traversal = _parser.get_syntax_tree().print(
-                        tree_traversal::dfs_post_order));
-    EXPECT_EQ(std::string("a"), traversal);
+    test_expected_ast_traversal("a", tree_traversal::dfs_post_order);
 }
 
 TEST_F(basic_parser_test, computes_concatenation)
 {
-    ASSERT_NO_THROW(_parser.compute("ab"));
-    std::string traversal;
-    ASSERT_NO_THROW(traversal = _parser.get_syntax_tree().print(
-                        tree_traversal::dfs_post_order));
-    EXPECT_EQ(std::string("ab"), traversal);
+    test_expected_ast_traversal("ab", tree_traversal::dfs_post_order);
+}
+
+TEST_F(basic_parser_test, computes_kleene_closure)
+{
+    test_expected_ast_traversal("a*", tree_traversal::dfs_post_order);
+    test_expected_ast_traversal("a*b", tree_traversal::dfs_post_order);
 }
 
 

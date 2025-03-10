@@ -47,74 +47,38 @@ std::unique_ptr<i_syntax_tree> basic_parser::create_syntax_tree()
 
 void basic_parser::consume_first_token(std::string& input)
 {
-    try {
-        _token_parser->compute(input);
-        if (!_token_parser->get_token())
-            throw exception::invalid_regex(
-                "The token parsed by the token parser is null.");
-        _token_parser->get_token()->add_to_ast_parser(*this);
-        input = input.substr(_token_parser->get_token()->get_source().size(),
-                             input.size());
-    }
-    catch (const exception::invalid_regex& ex) {
-        throw;
-    }
-    catch (const std::exception& ex) {
+    _token_parser->compute(input);
+    if (!_token_parser->get_token())
         throw exception::invalid_regex(
-            std::string("An error occured while trying to parse the first "
-                        "token of the regex (")
-            + ex.what() + ").");
-    }
-    catch (...) {
-        throw exception::invalid_regex(
-            "An unknown error occured while trying to parse the first "
-            "token of the regex.");
-    }
+            "The token parsed by the token parser is null.");
+    _token_parser->get_token()->add_to_ast_parser(*this);
+    input = input.substr(_token_parser->get_token()->get_source().size(),
+                         input.size());
 }
 
 
 void basic_parser::apply_higher_precedence_operators(
     const token_type& incoming_operator)
 {
-    try {
-        while (!_operator_stack.empty()) {
-            operator_precedence top_stack_precedence =
-                _operator_stack.top()->get_token().get_operator_precedence(
-                    incoming_operator);
-            if (operator_precedence::none == top_stack_precedence)
-                throw exception::invalid_regex(
-                    "The token at the top of the operator stack is not a valid "
-                    "operator.");
-            if (operator_precedence::lower == top_stack_precedence)
-                return;
-            _operator_stack.top()->get_token().apply_to_ast_parser(*this);
-        }
-    }
-    catch (const exception::invalid_regex& e) {
-        throw;
-    }
-    catch (...) {
-        throw exception::invalid_regex(
-            "An unknown error occurred while applying higher precedennce "
-            "operators from the top of the operator stack.");
+    while (!_operator_stack.empty()) {
+        operator_precedence top_stack_precedence =
+            _operator_stack.top()->get_token().get_operator_precedence(
+                incoming_operator);
+        if (operator_precedence::none == top_stack_precedence)
+            throw exception::invalid_regex(
+                "The token at the top of the operator stack is not a valid "
+                "operator.");
+        if (operator_precedence::lower == top_stack_precedence)
+            return;
+        _operator_stack.top()->get_token().apply_to_ast_parser(*this);
     }
 }
 
 
 void basic_parser::apply_all_operators()
 {
-    try {
-        while (!_operator_stack.empty())
-            _operator_stack.top()->get_token().apply_to_ast_parser(*this);
-    }
-    catch (const exception::invalid_regex& e) {
-        throw;
-    }
-    catch (...) {
-        throw exception::invalid_regex(
-            "An unknown error occurred while applying all operators from "
-            "the operator stack.");
-    }
+    while (!_operator_stack.empty())
+        _operator_stack.top()->get_token().apply_to_ast_parser(*this);
 }
 
 
@@ -136,6 +100,12 @@ void basic_parser::compute(const std::string& regex)
         clear();
         throw;
     }
+    catch (const std::exception& ex) {
+        clear();
+        throw exception::invalid_regex(
+            std::string("An error occurred while parsing the regex (")
+            + ex.what() + ").");
+    }
     catch (...) {
         clear();
         throw exception::invalid_regex(
@@ -152,19 +122,9 @@ const i_syntax_tree& basic_parser::get_syntax_tree() const
 
 void basic_parser::add_character(const character& character_token)
 {
-    try {
-        if (!_argument_stack.empty())
-            add_concatenation();
-        _argument_stack.emplace(_syntax_tree->create_node(character_token));
-    }
-    catch (const exception::invalid_regex& ex) {
-        throw;
-    }
-    catch (const std::exception& ex) {
-        throw exception::invalid_regex(
-            std::string("An error occured while adding a concatenation token (")
-            + ex.what() + ").");
-    }
+    if (!_argument_stack.empty())
+        add_concatenation();
+    _argument_stack.emplace(_syntax_tree->create_node(character_token));
 }
 
 
@@ -174,19 +134,9 @@ void basic_parser::add_concatenation()
         throw exception::invalid_regex(
             "The argument stack was empty while trying to add a concatenation "
             "token.");
-    try {
-        apply_higher_precedence_operators(token_type::concatenation);
-        _operator_stack.emplace(
-            _syntax_tree->create_node(std::make_unique<concatenation>()));
-    }
-    catch (const exception::invalid_regex& ex) {
-        throw;
-    }
-    catch (const std::exception& ex) {
-        throw exception::invalid_regex(
-            std::string("An error occured while adding a concatenation token (")
-            + ex.what() + ").");
-    }
+    apply_higher_precedence_operators(token_type::concatenation);
+    _operator_stack.emplace(
+        _syntax_tree->create_node(std::make_unique<concatenation>()));
 }
 
 
@@ -195,6 +145,7 @@ void basic_parser::add_quantifier(const quantifier& quantifier_token)
     if (_argument_stack.empty())
         throw exception::invalid_regex("The argument stack was empty while "
                                        "trying to add a quantifier token.");
+    apply_higher_precedence_operators(quantifier_token.get_type());
     _operator_stack.emplace(_syntax_tree->create_node(quantifier_token));
 }
 
@@ -219,26 +170,40 @@ void basic_parser::apply_concatenation_from_stack(
             "The argument stack had less than 2 elements while "
             "trying too apply a binary operator.");
 
-    try {
-        _operator_stack.top()->set_right(std::move(_argument_stack.top()));
-        _argument_stack.pop();
-        _operator_stack.top()->set_left(std::move(_argument_stack.top()));
-        _argument_stack.pop();
+    _operator_stack.top()->set_right(std::move(_argument_stack.top()));
+    _argument_stack.pop();
+    _operator_stack.top()->set_left(std::move(_argument_stack.top()));
+    _argument_stack.pop();
 
-        _argument_stack.emplace(std::move(_operator_stack.top()));
-        _operator_stack.pop();
-    }
-    catch (const std::exception& ex) {
-        throw exception::invalid_regex(
-            std::string("An error occured while trying to apply a binary "
-                        "operator from the operator stack (")
-            + ex.what() + ").");
-    }
+    _argument_stack.emplace(std::move(_operator_stack.top()));
+    _operator_stack.pop();
 }
 
 
-void basic_parser::apply_quantifier_from_stack(const quantifier&)
+void basic_parser::apply_quantifier_from_stack(const quantifier& expected_token)
 {
+    if (_operator_stack.empty())
+        throw exception::invalid_regex("The argument stack was empty while "
+                                       "trying to apply a unary operator from "
+                                       "the top of the operator stack.");
+
+    ;
+    if (_operator_stack.top()->get_token() != expected_token)
+        throw exception::invalid_regex(
+            "The token from the top of the operator stack did not match the "
+            "expected value.");
+    ;
+
+    if (_argument_stack.size() < 1)
+        throw exception::invalid_regex(
+            "The argument stack had less than 1 element while "
+            "trying too apply a unary operator.");
+
+    _operator_stack.top()->set_left(std::move(_argument_stack.top()));
+    _argument_stack.pop();
+    
+    _argument_stack.emplace(std::move(_operator_stack.top()));
+    _operator_stack.pop();
 }
 
 

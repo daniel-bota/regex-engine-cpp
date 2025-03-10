@@ -7,12 +7,20 @@
 
 namespace regex::parser
 {
+    enum class tree_traversal;
+}
+
+namespace regex::parser
+{
     class basic_parser_test : public ::testing::Test
     {
     protected:
         static void SetUpTestSuite();
         static void TearDownTestSuite();
         static basic_parser _parser;
+
+        void test_expected_ast_traversal(const std::string& regex,
+                                         const tree_traversal& traversal);
     };
 }
 

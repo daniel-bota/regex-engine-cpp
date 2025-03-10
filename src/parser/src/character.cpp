@@ -84,7 +84,7 @@ void character::apply_to_ast_parser(i_ast_parser&) const
 bool character::operator==(const i_token& other) const
 {
     return this->get_type() == other.get_type()
-           && this->get_source() == other.get_source();
+           && this->_source == other.get_source();
 }
 
 
