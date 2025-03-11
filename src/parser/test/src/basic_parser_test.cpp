@@ -7,10 +7,7 @@
 
 namespace
 {
-    const regex::parser::parse_status status_success{
-        regex::parser::parse_status::success};
-    const regex::parser::parse_result result_success{status_success,
-                                                     std::string()};
+    const std::string concat_src{};
 }
 
 NAMESPACE_BEGIN(regex::parser)
@@ -52,7 +49,7 @@ TEST_F(basic_parser_test, computes_concatenation)
     test_expected_ast_traversal(
         "abcd",
         tree_traversal::dfs_post_order,
-        {"a", "b", std::string(), "c", std::string(), "d", std::string()});
+        {"a", "b", concat_src, "c", concat_src, "d", concat_src});
 }
 
 TEST_F(basic_parser_test, computes_kleene_closure)
@@ -63,7 +60,7 @@ TEST_F(basic_parser_test, computes_kleene_closure)
     test_expected_ast_traversal(
         "a*b*c",
         tree_traversal::dfs_post_order,
-        {"a", "*", "b", "*", std::string(), "c", std::string()});
+        {"a", "*", "b", "*", concat_src, "c", concat_src});
 }
 
 

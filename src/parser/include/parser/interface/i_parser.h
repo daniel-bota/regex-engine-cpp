@@ -7,23 +7,6 @@
 
 namespace regex::parser
 {
-    enum class parse_status
-    {
-        success,
-        failure
-    };
-
-    struct parse_result
-    {
-        parse_status status;
-        std::string message;
-
-        bool operator==(const parse_result& other) const
-        {
-            return status == other.status && message == other.message;
-        }
-    };
-
     class i_parser
     {
         INTERFACE(i_parser)
