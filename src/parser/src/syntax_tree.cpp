@@ -4,6 +4,7 @@
 #include "parser/interface/i_token.h"
 #include "parser/node.h"
 
+#include <numeric>
 #include <stack>
 
 
@@ -57,19 +58,34 @@ std::unique_ptr<i_node> syntax_tree::create_node(const i_token& token) const
 std::string syntax_tree::print(const tree_traversal& traversal) const
 {
     switch (traversal) {
-    case tree_traversal::dfs_post_order:
-        return print_dfs_post_order();
+    case tree_traversal::dfs_post_order: {
+        std::vector<std::string> tokens = get_token_sources_dfs_post_order();
+        return std::accumulate(tokens.begin(), tokens.end(), std::string());
+    }
     default:
-        throw exception::invalid_argument(
-            "An unknown tree traversal type was "
-            "provided to the print the syntax tree.");
+        throw exception::invalid_argument("An unknown tree traversal type was "
+                                          "provided to print the syntax tree.");
     }
 }
 
 
-std::string syntax_tree::print_dfs_post_order() const
+std::vector<std::string>
+    syntax_tree::print_node_list(const tree_traversal& traversal) const
 {
-    std::string result{""};
+    switch (traversal) {
+    case tree_traversal::dfs_post_order:
+        return get_token_sources_dfs_post_order();
+    default:
+        throw exception::invalid_argument(
+            "An unknown tree traversal type was "
+            "provided to get the syntax tree token sources.");
+    }
+}
+
+
+std::vector<std::string> syntax_tree::get_token_sources_dfs_post_order() const
+{
+    std::vector<std::string> result{};
     std::stack<i_node*> stack;
     i_node* current = _root.get();
     while (true) {
@@ -87,7 +103,7 @@ std::string syntax_tree::print_dfs_post_order() const
             current = current->right();
         }
         else {
-            result += current->get_token().get_source();
+            result.push_back(current->get_token().get_source());
             current = nullptr;
         }
     }

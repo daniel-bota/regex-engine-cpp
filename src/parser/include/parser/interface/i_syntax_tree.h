@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace regex::parser
 {
@@ -29,15 +30,16 @@ namespace regex::parser
         virtual i_node* const root() const = 0;
         virtual void set_root(std::unique_ptr<i_node> node) = 0;
         /*
-        * throws exception
-        */
+         * throws exception
+         */
         virtual std::unique_ptr<i_node>
             create_node(std::unique_ptr<i_token>) const = 0;
         virtual std::unique_ptr<i_node>
             create_node(const i_token* const) const = 0;
-        virtual std::unique_ptr<i_node>
-            create_node(const i_token&) const = 0;
+        virtual std::unique_ptr<i_node> create_node(const i_token&) const = 0;
         virtual std::string print(const tree_traversal&) const = 0;
+        virtual std::vector<std::string>
+            print_node_list(const tree_traversal&) const = 0;
 
     protected:
     };

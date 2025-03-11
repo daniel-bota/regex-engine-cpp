@@ -19,8 +19,10 @@ namespace regex::parser
         static void TearDownTestSuite();
         static basic_parser _parser;
 
-        void test_expected_ast_traversal(const std::string& regex,
-                                         const tree_traversal& traversal);
+        void test_expected_ast_traversal(
+            const std::string& regex,
+            const tree_traversal& traversal,
+            const std::vector<std::string>& expected_output);
     };
 }
 

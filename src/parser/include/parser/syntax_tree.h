@@ -33,12 +33,30 @@ namespace regex::parser
         */
         std::unique_ptr<i_node>
             create_node(const i_token& token) const override;
+        /*
+        Returns a string created by concatenating the sources of the tokens in
+        the nodes. The nodes are traversed in the order dictated by the
+        specified traversal type.
+
+        Throws regex::parser::exception::invalid_argument exception if the
+        specified traversal type is not supported.
+        */
         std::string print(const tree_traversal& traversal) const override;
+        /*
+        Returns a std::vector<std::string> that contains the sources of the
+        tokens in the nodes. The nodes are traversed in the order dictated by
+        the specified traversal type.
+
+        Throws regex::parser::exception::invalid_argument exception if
+        the specified traversal type is not supported.
+        */
+        std::vector<std::string>
+            print_node_list(const tree_traversal& traversal) const override;
 
     private:
         std::unique_ptr<i_node> _root;
 
-        std::string print_dfs_post_order() const;
+        std::vector<std::string> get_token_sources_dfs_post_order() const;
     };
 }
 
