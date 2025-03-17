@@ -64,4 +64,24 @@ TEST_F(basic_parser_test, computes_kleene_closure)
 }
 
 
+TEST_F(basic_parser_test, computes_alternative)
+{
+    test_expected_ast_traversal("a|b",
+                                tree_traversal::dfs_post_order,
+                                {"a", "b", "|"});
+    test_expected_ast_traversal("ab*c|de",
+                                tree_traversal::dfs_post_order,
+                                {"a",
+                                 "b",
+                                 "*",
+                                 concat_src,
+                                 "c",
+                                 concat_src,
+                                 "d",
+                                 "e",
+                                 concat_src,
+                                 "|"});
+}
+
+
 NAMESPACE_END(regex::parser)

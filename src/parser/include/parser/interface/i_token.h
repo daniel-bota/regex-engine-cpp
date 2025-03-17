@@ -23,7 +23,7 @@ namespace regex::parser
         token,
         capture,
         character = 0,
-        alternation,
+        alternative,
         concatenation,
         quantifier
     };
@@ -45,9 +45,9 @@ namespace regex::parser
         // virtual const quantifier& get_quantifier() const = 0;
         virtual const std::string& get_source() const = 0;
         virtual operator_precedence
-            get_operator_precedence(const i_token&) const = 0;
+            get_operator_precedence_over(const i_token&) const = 0;
         virtual operator_precedence
-            get_operator_precedence(const token_type&) const = 0;
+            get_operator_precedence_over(const token_type&) const = 0;
         virtual std::unique_ptr<i_token> clone() const = 0;
 
         virtual void add_to_ast_parser(i_ast_parser&) const = 0;

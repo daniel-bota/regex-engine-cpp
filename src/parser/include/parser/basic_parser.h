@@ -8,6 +8,7 @@
 namespace regex::parser
 {
     enum class token_type;
+    class i_token;
     class i_token_parser;
     class i_node;
     class i_syntax_tree;
@@ -35,6 +36,8 @@ namespace regex::parser
         */
         void compute(const std::string& regex);
         const i_syntax_tree& get_syntax_tree() const override;
+        void add_operator_token(const i_token&);
+        void apply_binary_operator_from_stack(const i_token&);
         /*
         Adds a clone of the specified character token to the argument stack. If
         the argument stack is not empty, adds a concatenation token to the
@@ -56,6 +59,13 @@ namespace regex::parser
         */
         void add_quantifier(const quantifier&) override;
         /*
+        Adds a clone of the specified alternative token to the operator stack.
+
+        Throws regex::parser::exception::invalid_expression exception if
+        _argument_stack is empty.
+        */
+        void add_alternative(const alternative&) override;
+        /*
         Applies the operator from the top of the operator stack if it matches
         the specified concatenation token.
 
@@ -71,6 +81,14 @@ namespace regex::parser
         an error ocurs.
         */
         void apply_quantifier_from_stack(const quantifier&) override;
+        /*
+        Applies the operator from the top of the operator stack if it matches
+        the specified alternative token.
+
+        Throws regex::parser::exception::invalid_expression exception if
+        an error ocurs.
+        */
+        void apply_alternative_from_stack(const alternative&) override;
 
     protected:
     private:
@@ -78,6 +96,7 @@ namespace regex::parser
         std::stack<std::unique_ptr<i_node>> _operator_stack;
         std::unique_ptr<i_syntax_tree> _syntax_tree;
         std::unique_ptr<i_token_parser> _token_parser;
+        bool concatenate_next_character{false};
 
         /*
         Clears all stacks and the syntax tree.

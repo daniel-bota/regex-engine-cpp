@@ -93,7 +93,8 @@
 			"iomanip": "cpp",
 			"unordered_set": "cpp",
 			"forward_list": "cpp",
-			"regex": "cpp"
+			"regex": "cpp",
+			"numeric": "cpp"
 		},
 		"terminal.integrated.env.windows": {
 			"PATH": "$(env:PATH);$(env:gtest)\\bin;$(env:gtest)\\debug\\bin"

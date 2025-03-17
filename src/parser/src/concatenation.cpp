@@ -37,19 +37,21 @@ const std::string& concatenation::get_source() const
 }
 
 operator_precedence
-    concatenation::get_operator_precedence(const i_token& other) const
+    concatenation::get_operator_precedence_over(const i_token& other) const
 {
-    return get_operator_precedence(other.get_type());
+    return get_operator_precedence_over(other.get_type());
 }
 
-operator_precedence
-    concatenation::get_operator_precedence(const token_type& other_type) const
+operator_precedence concatenation::get_operator_precedence_over(
+    const token_type& other_type) const
 {
     switch (other_type) {
     case token_type::concatenation:
         return operator_precedence::equal;
     case token_type::quantifier:
         return operator_precedence::lower;
+    case token_type::alternative:
+        return operator_precedence::higher;
     default:
         return operator_precedence::higher;
     }

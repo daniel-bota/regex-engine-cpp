@@ -53,12 +53,12 @@ const std::string& character::get_source() const
 }
 
 operator_precedence
-    character::get_operator_precedence(const i_token& other) const
+    character::get_operator_precedence_over(const i_token& other) const
 {
-    return get_operator_precedence(other.get_type());
+    return get_operator_precedence_over(other.get_type());
 }
 
-operator_precedence character::get_operator_precedence(const token_type&) const
+operator_precedence character::get_operator_precedence_over(const token_type&) const
 {
     return operator_precedence::none;
 }

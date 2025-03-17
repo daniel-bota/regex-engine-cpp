@@ -51,14 +51,14 @@ const std::string& quantifier::get_source() const
 
 
 operator_precedence
-    quantifier::get_operator_precedence(const i_token& other) const
+    quantifier::get_operator_precedence_over(const i_token& other) const
 {
-    return get_operator_precedence(other.get_type());
+    return get_operator_precedence_over(other.get_type());
 }
 
 
 operator_precedence
-    quantifier::get_operator_precedence(const token_type& other) const
+    quantifier::get_operator_precedence_over(const token_type& other) const
 {
     switch (other) {
     case token_type::quantifier:

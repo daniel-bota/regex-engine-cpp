@@ -1,5 +1,6 @@
 #include "parser/token_parser.h"
 
+#include "parser/alternative.h"
 #include "parser/character.h"
 #include "parser/interface/i_node.h"
 #include "parser/interface/i_token.h"
@@ -13,7 +14,8 @@ NAMESPACE_BEGIN(regex::parser)
 
 namespace
 {
-    constexpr char kleene_closure{'*'};
+    constexpr const char kleene_closure{'*'};
+    constexpr const char alternative_source{'|'};
 
     const quantifier::range kleene_closure_range{0, -1};
 }
@@ -26,12 +28,18 @@ token_parser::~token_parser()
 
 void token_parser::compute(const std::string& source)
 {
-    if (source.front() == kleene_closure) {
-        _token = std::make_unique<quantifier>(source.substr(0, 1),
+    switch (source.front()) {
+    case kleene_closure:
+        _token = std::make_unique<quantifier>(std::string{source.front()},
                                               kleene_closure_range);
         return;
+    case alternative_source:
+        _token = std::make_unique<alternative>(std::string{source.front()});
+        return;
+    default:
+        _token = std::make_unique<character>(source);
+        break;
     }
-    _token = std::make_unique<character>(source);
 }
 
 

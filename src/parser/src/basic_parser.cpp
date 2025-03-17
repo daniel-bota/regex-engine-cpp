@@ -1,5 +1,6 @@
 #include "parser/basic_parser.h"
 
+#include "parser/alternative.h"
 #include "parser/character.h"
 #include "parser/concatenation.h"
 #include "parser/exception/basic_error.h"
@@ -62,7 +63,7 @@ void basic_parser::apply_higher_precedence_operators(
 {
     while (!_operator_stack.empty()) {
         operator_precedence top_stack_precedence =
-            _operator_stack.top()->get_token().get_operator_precedence(
+            _operator_stack.top()->get_token().get_operator_precedence_over(
                 incoming_operator);
         if (operator_precedence::none == top_stack_precedence)
             throw exception::invalid_regex(
@@ -87,6 +88,7 @@ void basic_parser::compute(const std::string& regex)
     std::cout << "basic_parser parsing regex: " << "\"" << regex << "\"...\n";
     clear();
     std::string input{regex};
+    concatenate_next_character = false;
 
     try {
         while (!input.empty())
@@ -120,38 +122,19 @@ const i_syntax_tree& basic_parser::get_syntax_tree() const
 }
 
 
-void basic_parser::add_character(const character& character_token)
-{
-    if (!_argument_stack.empty())
-        add_concatenation();
-    _argument_stack.emplace(_syntax_tree->create_node(character_token));
-}
-
-
-void basic_parser::add_concatenation()
+void regex::parser::basic_parser::add_operator_token(const i_token& token)
 {
     if (_argument_stack.empty())
         throw exception::invalid_regex(
-            "The argument stack was empty while trying to add a concatenation "
-            "token.");
-    apply_higher_precedence_operators(token_type::concatenation);
-    _operator_stack.emplace(
-        _syntax_tree->create_node(std::make_unique<concatenation>()));
+            "The argument stack was empty while "
+            "trying to add an operator token to the operator stack.");
+    apply_higher_precedence_operators(token.get_type());
+    _operator_stack.emplace(_syntax_tree->create_node(token));
 }
 
 
-void basic_parser::add_quantifier(const quantifier& quantifier_token)
-{
-    if (_argument_stack.empty())
-        throw exception::invalid_regex("The argument stack was empty while "
-                                       "trying to add a quantifier token.");
-    apply_higher_precedence_operators(quantifier_token.get_type());
-    _operator_stack.emplace(_syntax_tree->create_node(quantifier_token));
-}
-
-
-void basic_parser::apply_concatenation_from_stack(
-    const concatenation& expected_token)
+void regex::parser::basic_parser::apply_binary_operator_from_stack(
+    const i_token& expected_token)
 {
     if (_operator_stack.empty())
         throw exception::invalid_regex("The argument stack was empty while "
@@ -180,6 +163,42 @@ void basic_parser::apply_concatenation_from_stack(
 }
 
 
+void basic_parser::add_character(const character& character_token)
+{
+    if (concatenate_next_character)
+        add_concatenation();
+    _argument_stack.emplace(_syntax_tree->create_node(character_token));
+    if (_argument_stack.empty() || !concatenate_next_character)
+        concatenate_next_character = true;
+}
+
+
+void basic_parser::add_concatenation()
+{
+    add_operator_token(concatenation());
+}
+
+
+void basic_parser::add_quantifier(const quantifier& quantifier_token)
+{
+    add_operator_token(quantifier_token);
+}
+
+
+void basic_parser::add_alternative(const alternative& alternative_token)
+{
+    add_operator_token(alternative_token);
+    concatenate_next_character = false;
+}
+
+
+void basic_parser::apply_concatenation_from_stack(
+    const concatenation& expected_token)
+{
+    apply_binary_operator_from_stack(expected_token);
+}
+
+
 void basic_parser::apply_quantifier_from_stack(const quantifier& expected_token)
 {
     if (_operator_stack.empty())
@@ -201,9 +220,16 @@ void basic_parser::apply_quantifier_from_stack(const quantifier& expected_token)
 
     _operator_stack.top()->set_left(std::move(_argument_stack.top()));
     _argument_stack.pop();
-    
+
     _argument_stack.emplace(std::move(_operator_stack.top()));
     _operator_stack.pop();
+}
+
+
+void basic_parser::apply_alternative_from_stack(
+    const alternative& expected_token)
+{
+    apply_binary_operator_from_stack(expected_token);
 }
 
 

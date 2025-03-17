@@ -1,5 +1,5 @@
-#ifndef _REGEX_PARSER_QUANTIFIER_H
-#define _REGEX_PARSER_QUANTIFIER_H
+#ifndef _REGEX_PARSER_ALTERNATIVE_H
+#define _REGEX_PARSER_ALTERNATIVE_H
 
 #include "parser/interface/i_token.h"
 
@@ -7,22 +7,11 @@
 
 namespace regex::parser
 {
-    class quantifier : public i_token
+    class alternative : public i_token
     {
     public:
-        class range
-        {
-        public:
-            range(const unsigned short& min, const int& max);
-            unsigned short min() const;
-            int max() const;
-        private:
-            unsigned short _min;
-            int _max;
-        };
-
-        quantifier(const std::string& source, const range& range);
-
+        explicit alternative(const std::string& source);
+        alternative(const alternative& other);
         token_type get_type() const override;
         const std::string& get_source() const override;
         operator_precedence
@@ -36,13 +25,10 @@ namespace regex::parser
 
         bool operator==(const i_token&) const override;
 
-
-        // quantifier_range get_range() const override;
-
+    protected:
     private:
         std::string _source;
-        range _range;
     };
 }
 
-#endif //_REGEX_PARSER_QUANTIFIER_H
+#endif // _REGEX_PARSER_ALTERNATIVE_H

@@ -2,7 +2,6 @@
 #define _REGEX_PARSER_I_AST_PARSER_H
 
 #include "framework/macros.h"
-
 #include "parser/interface/i_parser.h"
 
 #include <string>
@@ -10,6 +9,7 @@
 namespace regex::parser
 {
     class i_syntax_tree;
+    class alternative;
     class character;
     class concatenation;
     class quantifier;
@@ -25,8 +25,10 @@ namespace regex::parser
         virtual void add_character(const character&) = 0;
         virtual void add_concatenation() = 0;
         virtual void add_quantifier(const quantifier&) = 0;
+        virtual void add_alternative(const alternative&) = 0;
         virtual void apply_concatenation_from_stack(const concatenation&) = 0;
         virtual void apply_quantifier_from_stack(const quantifier&) = 0;
+        virtual void apply_alternative_from_stack(const alternative&) = 0;
 
     protected:
     };
