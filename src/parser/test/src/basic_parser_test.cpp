@@ -1,9 +1,8 @@
 #include "test-suites/basic_parser_test.h"
 
 #include <parser/character.h>
-#include <parser/interface/i_node.h>
-#include <parser/syntax_tree.h>
-#include <parser/token_parser.h>
+#include <parser/lexer.h>
+#include <parser/token_syntax_tree.h>
 
 namespace
 {
@@ -13,7 +12,7 @@ namespace
 NAMESPACE_BEGIN(regex::parser)
 
 
-basic_parser basic_parser_test::_parser(std::make_unique<token_parser>());
+basic_parser basic_parser_test::_parser(std::make_unique<lexer>());
 
 
 void basic_parser_test::SetUpTestSuite()

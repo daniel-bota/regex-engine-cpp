@@ -2,7 +2,7 @@
 
 #include "framework/macros.h"
 #include "parser/interface/i_ast_parser.h"
-#include "parser/operator_type.h"
+#include "parser/interface/i_token.h"
 
 NAMESPACE_BEGIN(regex::parser)
 

@@ -1,7 +1,7 @@
-#ifndef _REGEX_PARSER_TOKEN_PARSER_H
-#define _REGEX_PARSER_TOKEN_PARSER_H
+#ifndef _REGEX_PARSER_LEXER_H
+#define _REGEX_PARSER_LEXER_H
 
-#include "parser/interface/i_token_parser.h"
+#include "parser/interface/i_lexer.h"
 
 #include <memory>
 
@@ -12,10 +12,10 @@ namespace regex::parser
 
 namespace regex::parser
 {
-    class token_parser : public i_token_parser
+    class lexer : public i_lexer
     {
     public:
-        ~token_parser();
+        ~lexer();
         void compute(const std::string& source) override;
         i_token* const get_token() const override;
 
@@ -24,4 +24,4 @@ namespace regex::parser
     };
 }
 
-#endif _REGEX_PARSER_TOKEN_PARSER_H
+#endif _REGEX_PARSER_LEXER_H

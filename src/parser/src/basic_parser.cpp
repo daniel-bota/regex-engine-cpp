@@ -6,24 +6,24 @@
 #include "parser/exception/basic_error.h"
 #include "parser/exception/invalid_argument.h"
 #include "parser/exception/invalid_regex.h"
-#include "parser/interface/i_node.h"
+#include "parser/interface/i_token_ast.h"
 #include "parser/interface/i_token.h"
 #include "parser/quantifier.h"
-#include "parser/syntax_tree.h"
-#include "parser/token_parser.h"
+#include "parser/token_syntax_tree.h"
+#include "parser/lexer.h"
 
 #include <iostream>
 
 NAMESPACE_BEGIN(regex::parser)
 
 
-basic_parser::basic_parser(std::unique_ptr<i_token_parser> token_parser)
+basic_parser::basic_parser(std::unique_ptr<i_lexer> lexer)
     : _syntax_tree(create_syntax_tree()),
-      _token_parser(std::move(token_parser))
+      _lexer(std::move(lexer))
 {
-    if (!_token_parser)
+    if (!_lexer)
         throw exception::invalid_argument(
-            "The i_token_parser passed as an argument to the constructor of "
+            "The i_lexer passed as an argument to the constructor of "
             "regex::parser::basic_parser cannot be null.");
 }
 
@@ -36,24 +36,24 @@ basic_parser::~basic_parser()
 void basic_parser::clear()
 {
     _syntax_tree = create_syntax_tree();
-    _argument_stack = std::stack<std::unique_ptr<i_node>>();
-    _operator_stack = std::stack<std::unique_ptr<i_node>>();
+    _argument_stack = std::stack<std::unique_ptr<i_binary_token_node>>();
+    _operator_stack = std::stack<std::unique_ptr<i_binary_token_node>>();
 }
 
-std::unique_ptr<i_syntax_tree> basic_parser::create_syntax_tree()
+std::unique_ptr<i_token_ast> basic_parser::create_syntax_tree()
 {
-    return std::make_unique<syntax_tree>();
+    return std::make_unique<token_syntax_tree>();
 }
 
 
 void basic_parser::consume_first_token(std::string& input)
 {
-    _token_parser->compute(input);
-    if (!_token_parser->get_token())
+    _lexer->compute(input);
+    if (!_lexer->get_token())
         throw exception::invalid_regex(
             "The token parsed by the token parser is null.");
-    _token_parser->get_token()->add_to_ast_parser(*this);
-    input = input.substr(_token_parser->get_token()->get_source().size(),
+    _lexer->get_token()->add_to_ast_parser(*this);
+    input = input.substr(_lexer->get_token()->get_source().size(),
                          input.size());
 }
 
@@ -116,7 +116,7 @@ void basic_parser::compute(const std::string& regex)
 }
 
 
-const i_syntax_tree& basic_parser::get_syntax_tree() const
+const i_token_ast& basic_parser::get_syntax_tree() const
 {
     return *_syntax_tree;
 }

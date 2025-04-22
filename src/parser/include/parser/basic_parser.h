@@ -7,11 +7,11 @@
 
 namespace regex::parser
 {
-    enum class token_type;
     class i_token;
-    class i_token_parser;
-    class i_node;
-    class i_syntax_tree;
+    enum class token_type;
+    class i_lexer;
+    class i_binary_token_node;
+    class i_token_ast;
 }
 
 namespace regex::parser
@@ -20,12 +20,12 @@ namespace regex::parser
     {
     public:
         /*
-        Takes ownership of the specified i_token_parser.
+        Takes ownership of the specified i_lexer.
 
         Throws regex::parser::exception::invalid_argument exception if
-        token_parser is null.
+        lexer is null.
         */
-        explicit basic_parser(std::unique_ptr<i_token_parser> token_parser);
+        explicit basic_parser(std::unique_ptr<i_lexer> lexer);
         ~basic_parser();
         /*
         Transforms the specified regular expression into an abstract syntax
@@ -35,7 +35,7 @@ namespace regex::parser
         occurs.
         */
         void compute(const std::string& regex);
-        const i_syntax_tree& get_syntax_tree() const override;
+        const i_token_ast& get_syntax_tree() const override;
         void add_operator_token(const i_token&);
         void apply_binary_operator_from_stack(const i_token&);
         /*
@@ -92,17 +92,17 @@ namespace regex::parser
 
     protected:
     private:
-        std::stack<std::unique_ptr<i_node>> _argument_stack;
-        std::stack<std::unique_ptr<i_node>> _operator_stack;
-        std::unique_ptr<i_syntax_tree> _syntax_tree;
-        std::unique_ptr<i_token_parser> _token_parser;
+        std::stack<std::unique_ptr<i_binary_token_node>> _argument_stack;
+        std::stack<std::unique_ptr<i_binary_token_node>> _operator_stack;
+        std::unique_ptr<i_token_ast> _syntax_tree;
+        std::unique_ptr<i_lexer> _lexer;
         bool concatenate_next_character{false};
 
         /*
         Clears all stacks and the syntax tree.
         */
         void clear();
-        std::unique_ptr<i_syntax_tree> create_syntax_tree();
+        std::unique_ptr<i_token_ast> create_syntax_tree();
         /*
         Cosumes the first token from the input string and adds it to the
         corresponding stack (argument or operator).

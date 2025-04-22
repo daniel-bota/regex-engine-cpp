@@ -8,7 +8,7 @@
 
 namespace regex::parser
 {
-    class i_syntax_tree;
+    class i_token_ast;
     class alternative;
     class character;
     class concatenation;
@@ -21,7 +21,7 @@ namespace regex::parser
     {
         INTERFACE(i_ast_parser)
     public:
-        virtual const i_syntax_tree& get_syntax_tree() const = 0;
+        virtual const i_token_ast& get_syntax_tree() const = 0;
         virtual void add_character(const character&) = 0;
         virtual void add_concatenation() = 0;
         virtual void add_quantifier(const quantifier&) = 0;

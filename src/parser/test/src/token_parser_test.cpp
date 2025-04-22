@@ -1,28 +1,27 @@
-#include "test-suites/token_parser_test.h"
+#include "test-suites/lexer_test.h"
 
 #include <parser/alternative.h>
 #include <parser/character.h>
-#include <parser/interface/i_node.h>
 #include <parser/quantifier.h>
-#include <parser/syntax_tree.h>
+#include <parser/token_syntax_tree.h>
 
 NAMESPACE_BEGIN(regex::parser)
 
 
-token_parser token_parser_test::_parser;
+lexer lexer_test::_parser;
 
 
-void token_parser_test::SetUpTestSuite()
+void lexer_test::SetUpTestSuite()
 {
 }
 
 
-void token_parser_test::TearDownTestSuite()
+void lexer_test::TearDownTestSuite()
 {
 }
 
 
-TEST_F(token_parser_test, computes_single_character)
+TEST_F(lexer_test, computes_single_character)
 {
     ASSERT_NO_THROW(_parser.compute("a"));
     ASSERT_TRUE(_parser.get_token());
@@ -30,7 +29,7 @@ TEST_F(token_parser_test, computes_single_character)
     EXPECT_EQ(expected, *_parser.get_token());
 }
 
-TEST_F(token_parser_test, computes_kleene_closure)
+TEST_F(lexer_test, computes_kleene_closure)
 {
     ASSERT_NO_THROW(_parser.compute("*abc"));
     ASSERT_TRUE(_parser.get_token());
@@ -38,7 +37,7 @@ TEST_F(token_parser_test, computes_kleene_closure)
     EXPECT_EQ(expected, *_parser.get_token());
 }
 
-TEST_F(token_parser_test, computes_alternative_token)
+TEST_F(lexer_test, computes_alternative_token)
 {
     ASSERT_NO_THROW(_parser.compute("|"));
     ASSERT_TRUE(_parser.get_token());

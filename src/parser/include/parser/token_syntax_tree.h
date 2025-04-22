@@ -1,24 +1,24 @@
 #ifndef _REGEX_PARSER_SYNTAX_TREE_H
 #define _REGEX_PARSER_SYNTAX_TREE_H
 
-#include "parser/interface/i_syntax_tree.h"
+#include "parser/interface/i_token_ast.h"
 
 #include <memory>
 
 namespace regex::parser
 {
-    class syntax_tree : public i_syntax_tree
+    class token_syntax_tree : public i_token_ast
     {
     public:
-        i_node* const root() const override;
-        void set_root(std::unique_ptr<i_node> node) override;
+        // i_binary_token_node* const root() const override;
+        void set_root(std::unique_ptr<i_binary_token_node> node) override;
         /*
         Moves the specified i_token to the created node.
 
         if token is null -> throws
         regex::parser::exception::invalid_argument exception.
         */
-        std::unique_ptr<i_node>
+        std::unique_ptr<i_binary_token_node>
             create_node(std::unique_ptr<i_token> token) const override;
         /*
         Creates a new node with a clone of the specified i_token.
@@ -26,12 +26,12 @@ namespace regex::parser
         If token is null -> throws
         regex::parser::exception::invalid_argument exception.
         */
-        std::unique_ptr<i_node>
+        std::unique_ptr<i_binary_token_node>
             create_node(const i_token* const) const override;
         /*
         Creates a new node with a clone of the specified i_token.
         */
-        std::unique_ptr<i_node>
+        std::unique_ptr<i_binary_token_node>
             create_node(const i_token& token) const override;
         /*
         Returns a string created by concatenating the sources of the tokens in
@@ -54,7 +54,7 @@ namespace regex::parser
             print_node_list(const tree_traversal& traversal) const override;
 
     private:
-        std::unique_ptr<i_node> _root;
+        std::unique_ptr<i_binary_token_node> _root;
 
         std::vector<std::string> get_token_sources_dfs_post_order() const;
     };

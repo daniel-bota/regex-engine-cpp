@@ -1,5 +1,5 @@
-#ifndef _REGEX_PARSER_I_TOKEN_PARSER_H
-#define _REGEX_PARSER_I_TOKEN_PARSER_H
+#ifndef _REGEX_PARSER_I_LEXER_H
+#define _REGEX_PARSER_I_LEXER_H
 
 #include "framework/macros.h"
 
@@ -12,9 +12,9 @@ namespace regex::parser
 
 namespace regex::parser
 {
-    class i_token_parser : public i_parser
+    class i_lexer : public i_parser
     {
-        INTERFACE(i_token_parser)
+        INTERFACE(i_lexer)
     public:
         virtual i_token* const get_token() const = 0;
 
@@ -22,4 +22,4 @@ namespace regex::parser
     };
 }
 
-#endif //_REGEX_PARSER_I_TOKEN_PARSER_H
+#endif //_REGEX_PARSER_I_LEXER_H

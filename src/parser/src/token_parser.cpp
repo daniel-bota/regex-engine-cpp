@@ -1,11 +1,9 @@
-#include "parser/token_parser.h"
-
 #include "parser/alternative.h"
 #include "parser/character.h"
-#include "parser/interface/i_node.h"
 #include "parser/interface/i_token.h"
+#include "parser/interface/i_token_ast.h"
+#include "parser/lexer.h"
 #include "parser/quantifier.h"
-#include "parser/syntax_tree.h"
 
 #include <framework/macros.h>
 
@@ -21,12 +19,12 @@ namespace
 }
 
 
-token_parser::~token_parser()
+lexer::~lexer()
 {
 }
 
 
-void token_parser::compute(const std::string& source)
+void lexer::compute(const std::string& source)
 {
     switch (source.front()) {
     case kleene_closure:
@@ -43,7 +41,7 @@ void token_parser::compute(const std::string& source)
 }
 
 
-i_token* const token_parser::get_token() const
+i_token* const lexer::get_token() const
 {
     return _token.get();
 }

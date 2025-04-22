@@ -1,8 +1,7 @@
-#include "parser/syntax_tree.h"
-
+#include "parser/binary_token_node.h"
 #include "parser/exception/invalid_argument.h"
 #include "parser/interface/i_token.h"
-#include "parser/node.h"
+#include "parser/token_syntax_tree.h"
 
 #include <numeric>
 #include <stack>
@@ -11,51 +10,53 @@
 NAMESPACE_BEGIN(regex::parser)
 
 
-i_node* const syntax_tree::root() const
-{
-    return _root.get();
-}
+// i_binary_token_node* const token_syntax_tree::root() const
+// {
+//     return _root.get();
+// }
 
 
-void syntax_tree::set_root(std::unique_ptr<i_node> node)
+void token_syntax_tree::set_root(std::unique_ptr<i_binary_token_node> node)
 {
     _root = std::move(node);
 }
 
 
-std::unique_ptr<i_node>
-    syntax_tree::create_node(std::unique_ptr<i_token> token) const
+std::unique_ptr<i_binary_token_node>
+    token_syntax_tree::create_node(std::unique_ptr<i_token> token) const
 {
     if (!token)
         throw exception::invalid_argument(
             "The i_token passed as an argument to "
-            "regex::parser::syntax_tree::create_node() "
+            "regex::parser::token_syntax_tree::create_node() "
             "cannot be null.");
 
-    return std::make_unique<node>(std::move(token));
+    return std::make_unique<binary_token_node>(std::move(token));
 }
 
 
-std::unique_ptr<i_node>
-    regex::parser::syntax_tree::create_node(const i_token* const token) const
+std::unique_ptr<i_binary_token_node>
+    regex::parser::token_syntax_tree::create_node(
+        const i_token* const token) const
 {
     if (!token)
         throw exception::invalid_argument(
             "The i_token passed as an argument to "
-            "regex::parser::syntax_tree::create_node() "
+            "regex::parser::token_syntax_tree::create_node() "
             "cannot be null.");
 
-    return std::make_unique<node>(token->clone());
+    return std::make_unique<binary_token_node>(token->clone());
 }
 
 
-std::unique_ptr<i_node> syntax_tree::create_node(const i_token& token) const
+std::unique_ptr<i_binary_token_node>
+    token_syntax_tree::create_node(const i_token& token) const
 {
-    return std::make_unique<node>(token.clone());
+    return std::make_unique<binary_token_node>(token.clone());
 }
 
 
-std::string syntax_tree::print(const tree_traversal& traversal) const
+std::string token_syntax_tree::print(const tree_traversal& traversal) const
 {
     switch (traversal) {
     case tree_traversal::dfs_post_order: {
@@ -70,7 +71,7 @@ std::string syntax_tree::print(const tree_traversal& traversal) const
 
 
 std::vector<std::string>
-    syntax_tree::print_node_list(const tree_traversal& traversal) const
+    token_syntax_tree::print_node_list(const tree_traversal& traversal) const
 {
     switch (traversal) {
     case tree_traversal::dfs_post_order:
@@ -83,11 +84,12 @@ std::vector<std::string>
 }
 
 
-std::vector<std::string> syntax_tree::get_token_sources_dfs_post_order() const
+std::vector<std::string>
+    token_syntax_tree::get_token_sources_dfs_post_order() const
 {
     std::vector<std::string> result{};
-    std::stack<i_node*> stack;
-    i_node* current = _root.get();
+    std::stack<i_binary_token_node*> stack;
+    i_binary_token_node* current = _root.get();
     while (true) {
         while (current) {
             stack.push(current);
