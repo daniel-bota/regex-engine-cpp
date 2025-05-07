@@ -1,6 +1,6 @@
-#ifndef _PCH_H
-#define _PCH_H
+#ifndef _REGEX_ENGINE_PARSER_TEST_PCH_H
+#define _REGEX_ENGINE_PARSER_TEST_PCH_H
 
 #include <gtest/gtest.h>
 
-#endif // _PCH_H
+#endif // _REGEX_ENGINE_PARSER_TEST_PCH_H
