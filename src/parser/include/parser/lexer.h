@@ -15,6 +15,8 @@ namespace regex::parser
     class lexer : public i_lexer
     {
     public:
+        lexer();
+        // implement rule of five
         ~lexer();
         void compute(const std::string& source) override;
         i_token* const get_token() const override;
@@ -24,4 +26,4 @@ namespace regex::parser
     };
 }
 
-#endif _REGEX_PARSER_LEXER_H
+#endif //_REGEX_PARSER_LEXER_H

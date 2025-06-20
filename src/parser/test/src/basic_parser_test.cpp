@@ -33,7 +33,7 @@ void basic_parser_test::test_expected_ast_traversal(
     ASSERT_NO_THROW(_parser.compute(regex));
     std::vector<std::string> ast_traversal;
     ASSERT_NO_THROW(ast_traversal =
-                        _parser.get_syntax_tree().print_node_list(traversal));
+                        _parser.get_syntax_tree().get_token_source_list(traversal));
     EXPECT_EQ(expected_output, ast_traversal);
 }
 

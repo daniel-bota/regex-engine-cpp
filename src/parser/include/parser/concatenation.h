@@ -24,6 +24,7 @@ public:
     void apply_to_ast_parser(i_ast_parser&) const override;
 
     bool operator==(const i_token&) const override;
+    bool operator!=(const i_token&) const override;
 
 private:
     std::string _source;

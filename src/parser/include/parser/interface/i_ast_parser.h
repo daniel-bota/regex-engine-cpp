@@ -9,6 +9,7 @@
 namespace regex::parser
 {
     class i_token_ast;
+    class i_token;
     class alternative;
     class character;
     class concatenation;
@@ -22,13 +23,13 @@ namespace regex::parser
         INTERFACE(i_ast_parser)
     public:
         virtual const i_token_ast& get_syntax_tree() const = 0;
-        virtual void add_character(const character&) = 0;
+        virtual void add_character(const i_token&) = 0;
         virtual void add_concatenation() = 0;
-        virtual void add_quantifier(const quantifier&) = 0;
-        virtual void add_alternative(const alternative&) = 0;
-        virtual void apply_concatenation_from_stack(const concatenation&) = 0;
-        virtual void apply_quantifier_from_stack(const quantifier&) = 0;
-        virtual void apply_alternative_from_stack(const alternative&) = 0;
+        virtual void add_quantifier(const i_token&) = 0;
+        virtual void add_alternative(const i_token&) = 0;
+        virtual void apply_concatenation_from_stack(const i_token&) = 0;
+        virtual void apply_quantifier_from_stack(const i_token&) = 0;
+        virtual void apply_alternative_from_stack(const i_token&) = 0;
 
     protected:
     };

@@ -56,7 +56,7 @@ std::unique_ptr<i_binary_token_node>
 }
 
 
-std::string token_syntax_tree::print(const tree_traversal& traversal) const
+std::string token_syntax_tree::print_token_sources(const tree_traversal& traversal) const
 {
     switch (traversal) {
     case tree_traversal::dfs_post_order: {
@@ -65,13 +65,13 @@ std::string token_syntax_tree::print(const tree_traversal& traversal) const
     }
     default:
         throw exception::invalid_argument("An unknown tree traversal type was "
-                                          "provided to print the syntax tree.");
+                                          "provided for printing the syntax tree token sources.");
     }
 }
 
 
 std::vector<std::string>
-    token_syntax_tree::print_node_list(const tree_traversal& traversal) const
+    token_syntax_tree::get_token_source_list(const tree_traversal& traversal) const
 {
     switch (traversal) {
     case tree_traversal::dfs_post_order:
@@ -81,6 +81,12 @@ std::vector<std::string>
             "An unknown tree traversal type was "
             "provided to get the syntax tree token sources.");
     }
+}
+
+
+std::vector<const i_token*> token_syntax_tree::get_token_list(
+    const tree_traversal&) const
+{
 }
 
 

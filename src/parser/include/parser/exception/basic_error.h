@@ -1,12 +1,12 @@
 #ifndef _REGEX_PARSER_EXCEPTION_BASIC_H
 #define _REGEX_PARSER_EXCEPTION_BASIC_H
 
-#include <exception>
+#include <stdexcept>
 #include <string>
 
 namespace regex::parser::exception
 {
-    class basic_error : public std::exception
+    class basic_error : public std::logic_error
     {
     public:
         // std::string message() const;

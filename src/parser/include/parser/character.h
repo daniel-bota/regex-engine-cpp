@@ -22,7 +22,8 @@ public:
     void add_to_ast_parser(i_ast_parser&) const override;
     void apply_to_ast_parser(i_ast_parser&) const override;
 
-    bool operator==(const i_token& other) const override;
+    bool operator==(const i_token&) const override;
+    bool operator!=(const i_token&) const override;
 
 protected:
     character() = delete;

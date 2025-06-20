@@ -11,4 +11,4 @@ namespace regex::compiler
     };
 }
 
-#endif // _REGEX_COMPILER_NFA_H
+#endif // _REGEX_COMPILER_I_NFA_H

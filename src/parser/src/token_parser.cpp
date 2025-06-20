@@ -19,6 +19,11 @@ namespace
 }
 
 
+lexer::lexer()
+{
+}
+
+
 lexer::~lexer()
 {
 }

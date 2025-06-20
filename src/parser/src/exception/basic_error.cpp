@@ -6,7 +6,7 @@ NAMESPACE_BEGIN(regex::parser::exception)
 
 
 basic_error::basic_error(const std::string& message)
-    : std::exception(message.c_str())
+    : std::logic_error(message.c_str())
 {
 }
 

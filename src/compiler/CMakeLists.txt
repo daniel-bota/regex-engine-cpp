@@ -9,6 +9,7 @@ add_library(compiler STATIC ${COMPILER_SOURCES})
 
 target_include_directories(compiler PRIVATE ${COMPILER_INCLUDE_DIR})
 target_include_directories(compiler INTERFACE ${COMPILER_INCLUDE_DIR})
-target_link_libraries(compiler PUBLIC framework)
+# target_link_libraries(compiler PRIVATE framework)
+target_link_libraries(compiler PRIVATE parser)
 
 add_subdirectory(test)

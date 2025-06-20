@@ -163,7 +163,7 @@ void regex::parser::basic_parser::apply_binary_operator_from_stack(
 }
 
 
-void basic_parser::add_character(const character& character_token)
+void basic_parser::add_character(const i_token& character_token)
 {
     if (concatenate_next_character)
         add_concatenation();
@@ -179,13 +179,13 @@ void basic_parser::add_concatenation()
 }
 
 
-void basic_parser::add_quantifier(const quantifier& quantifier_token)
+void basic_parser::add_quantifier(const i_token& quantifier_token)
 {
     add_operator_token(quantifier_token);
 }
 
 
-void basic_parser::add_alternative(const alternative& alternative_token)
+void basic_parser::add_alternative(const i_token& alternative_token)
 {
     add_operator_token(alternative_token);
     concatenate_next_character = false;
@@ -193,13 +193,13 @@ void basic_parser::add_alternative(const alternative& alternative_token)
 
 
 void basic_parser::apply_concatenation_from_stack(
-    const concatenation& expected_token)
+    const i_token& expected_token)
 {
     apply_binary_operator_from_stack(expected_token);
 }
 
 
-void basic_parser::apply_quantifier_from_stack(const quantifier& expected_token)
+void basic_parser::apply_quantifier_from_stack(const i_token& expected_token)
 {
     if (_operator_stack.empty())
         throw exception::invalid_regex("The argument stack was empty while "
@@ -227,7 +227,7 @@ void basic_parser::apply_quantifier_from_stack(const quantifier& expected_token)
 
 
 void basic_parser::apply_alternative_from_stack(
-    const alternative& expected_token)
+    const i_token& expected_token)
 {
     apply_binary_operator_from_stack(expected_token);
 }

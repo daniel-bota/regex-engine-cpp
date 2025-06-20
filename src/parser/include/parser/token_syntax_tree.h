@@ -1,5 +1,5 @@
-#ifndef _REGEX_PARSER_SYNTAX_TREE_H
-#define _REGEX_PARSER_SYNTAX_TREE_H
+#ifndef _REGEX_PARSER_TOKEN_SYNTAX_TREE_H
+#define _REGEX_PARSER_TOKEN_SYNTAX_TREE_H
 
 #include "parser/interface/i_token_ast.h"
 
@@ -41,7 +41,8 @@ namespace regex::parser
         Throws regex::parser::exception::invalid_argument exception if the
         specified traversal type is not supported.
         */
-        std::string print(const tree_traversal& traversal) const override;
+        std::string
+            print_token_sources(const tree_traversal& traversal) const override;
         /*
         Returns a std::vector<std::string> that contains the sources of the
         tokens in the nodes. The nodes are traversed in the order dictated by
@@ -50,8 +51,20 @@ namespace regex::parser
         Throws regex::parser::exception::invalid_argument exception if
         the specified traversal type is not supported.
         */
-        std::vector<std::string>
-            print_node_list(const tree_traversal& traversal) const override;
+        std::vector<std::string> get_token_source_list(
+            const tree_traversal& traversal) const override;
+
+        /*
+        Returns a std::vector<const regex::parser::i_token&> containing 
+        the tokens in the syntax tree.
+        The nodes are traversed in the order dictated by
+        the specified traversal type.
+
+        Throws regex::parser::exception::invalid_argument exception if
+        the specified traversal type is not supported.
+        */
+        virtual std::vector<const i_token*>
+            get_token_list(const tree_traversal&) const override;
 
     private:
         std::unique_ptr<i_binary_token_node> _root;
@@ -60,4 +73,4 @@ namespace regex::parser
     };
 }
 
-#endif // _REGEX_PARSER_SYNTAX_TREE_H
+#endif // _REGEX_PARSER_TOKEN_SYNTAX_TREE_H

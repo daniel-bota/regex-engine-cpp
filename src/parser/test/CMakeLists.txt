@@ -27,7 +27,7 @@ target_link_libraries(
 target_include_directories(
     parser-test
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
-    PRIVATE $<TARGET_PROPERTY:parser,INTERFACE_INCLUDE_DIRECTORIES>
+    # PRIVATE $<TARGET_PROPERTY:parser,INTERFACE_INCLUDE_DIRECTORIES>
 )
 
 # enable_testing()

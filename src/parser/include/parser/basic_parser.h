@@ -1,8 +1,9 @@
 #ifndef _REGEX_PARSER_BASIC_PARSER_H
 #define _REGEX_PARSER_BASIC_PARSER_H
 
+#include "parser/interface/i_ast_parser.h"
+
 #include <memory>
-#include <parser/interface/i_ast_parser.h>
 #include <stack>
 
 namespace regex::parser
@@ -43,7 +44,7 @@ namespace regex::parser
         the argument stack is not empty, adds a concatenation token to the
         top of the operand stack.
         */
-        void add_character(const character&) override;
+        void add_character(const i_token&) override;
         /*
         Adds a new concatenation token to the operator stack.
 
@@ -57,14 +58,14 @@ namespace regex::parser
         Throws regex::parser::exception::invalid_expression exception if
         _argument_stack is empty.
         */
-        void add_quantifier(const quantifier&) override;
+        void add_quantifier(const i_token&) override;
         /*
         Adds a clone of the specified alternative token to the operator stack.
 
         Throws regex::parser::exception::invalid_expression exception if
         _argument_stack is empty.
         */
-        void add_alternative(const alternative&) override;
+        void add_alternative(const i_token&) override;
         /*
         Applies the operator from the top of the operator stack if it matches
         the specified concatenation token.
@@ -72,7 +73,7 @@ namespace regex::parser
         Throws regex::parser::exception::invalid_expression exception if
         an error ocurs.
         */
-        void apply_concatenation_from_stack(const concatenation&) override;
+        void apply_concatenation_from_stack(const i_token&) override;
         /*
         Applies the operator from the top of the operator stack if it matches
         the specified quantifier token.
@@ -80,7 +81,7 @@ namespace regex::parser
         Throws regex::parser::exception::invalid_expression exception if
         an error ocurs.
         */
-        void apply_quantifier_from_stack(const quantifier&) override;
+        void apply_quantifier_from_stack(const i_token&) override;
         /*
         Applies the operator from the top of the operator stack if it matches
         the specified alternative token.
@@ -88,7 +89,7 @@ namespace regex::parser
         Throws regex::parser::exception::invalid_expression exception if
         an error ocurs.
         */
-        void apply_alternative_from_stack(const alternative&) override;
+        void apply_alternative_from_stack(const i_token&) override;
 
     protected:
     private:

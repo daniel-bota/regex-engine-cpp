@@ -94,6 +94,11 @@ bool quantifier::operator==(const i_token& other) const
 }
 
 
+bool quantifier::operator!=(const i_token& other) const
+{
+    return !(*this == other);
+}
+
 // quantifier_range quantifier::get_range() const
 // {
 //     return quantifier_range();

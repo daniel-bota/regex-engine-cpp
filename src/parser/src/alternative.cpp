@@ -76,4 +76,10 @@ bool alternative::operator==(const i_token& other) const
 }
 
 
+bool alternative::operator!=(const i_token& other) const
+{
+    return !(*this == other);
+}
+
+
 NAMESPACE_END(regex::parser)

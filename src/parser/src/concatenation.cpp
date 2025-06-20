@@ -81,4 +81,10 @@ bool concatenation::operator==(const i_token& other) const
 }
 
 
+bool concatenation::operator!=(const i_token& other) const
+{
+    return !(*this == other);
+}
+
+
 NAMESPACE_END(regex::parser)

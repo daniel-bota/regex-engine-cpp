@@ -11,7 +11,7 @@ set(
     CACHE
     BOOL
     "Automatically find and configure Google Test
-    . You will need to reconfigure the project using a package manager toolchain file for this to work."
+    . You will need to reconfigure the project using a package manager toolchain file in order for this to work."
 )
 
 if (CONFIGURE_GOOGLETEST_AUTOMATICALLY)

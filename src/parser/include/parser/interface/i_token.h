@@ -32,6 +32,7 @@ public:
     virtual void apply_to_ast_parser(i_ast_parser&) const = 0;
 
     virtual bool operator==(const i_token&) const = 0;
+    virtual bool operator!=(const i_token&) const = 0;
 
 protected:
 };

@@ -31,9 +31,11 @@ public:
         create_node(const i_token* const) const = 0;
     virtual std::unique_ptr<i_binary_token_node>
         create_node(const i_token&) const = 0;
-    virtual std::string print(const tree_traversal&) const = 0;
+    virtual std::string print_token_sources(const tree_traversal&) const = 0;
     virtual std::vector<std::string>
-        print_node_list(const tree_traversal&) const = 0;
+        get_token_source_list(const tree_traversal&) const = 0;
+    virtual std::vector<const i_token*>
+        get_token_list(const tree_traversal&) const = 0;
 
 protected:
 };
