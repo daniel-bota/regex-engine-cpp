@@ -1,0 +1,6 @@
+#ifndef _REGEX_ENGINE_COMPILER_TEST_PCH_H
+#define _REGEX_ENGINE_COMPILER_TEST_PCH_H
+
+#include <gtest/gtest.h>
+
+#endif // _REGEX_ENGINE_COMPILER_TEST_PCH_H

@@ -47,4 +47,7 @@ _deps
 
 #build
 build
+
+*.sh
 *.code-workspace
+.vscode
